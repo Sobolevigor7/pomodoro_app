@@ -1,3 +1,14 @@
+@import '~@csstools/normalize.css';
+
+:root {
+  --grey: #F4F4F4;
+  --green: #A8B64F;
+  --button-disabled: #D5DBAF;
+  --todoborder: #E4E4E4;
+  --light-grey-text: #999999;
+  --dark-grey-text: #333333;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

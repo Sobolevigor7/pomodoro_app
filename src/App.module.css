@@ -1,0 +1,23 @@
+.App {
+    text-align: center;
+}
+
+
+.AppHeader {
+    background-color: lightsteelblue;
+    min-height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.customheader {
+    color: red;
+}
+
+.AppLink {
+    color: #61dafb;
+}
+

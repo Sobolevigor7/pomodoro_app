@@ -1,0 +1,94 @@
+.todoList {
+    list-style: none;
+    width: 80%;
+    padding-left: 0;
+}
+
+.listItem {
+    border-top: 1px solid var(--todoborder);
+    align-items: baseline !important;
+}
+
+.listItem:last-child {
+    border-bottom: 1px solid var(--todoborder);
+}
+
+.totalTime {
+    display: flex;
+    color: var(--light-grey-text);
+}
+
+.dropdownToggle {
+    border: none;
+}
+
+.dropdownToggle::after {
+    display: none;
+}
+
+.todoListValue, .todoListValue:focus-visible {
+    border: none;
+    outline: none;
+    color: var(--dark-grey-text);
+    background-color: var(--grey);
+    display: flex;
+    flex-grow: 1;
+}
+
+.todoListValue[readonly] {
+    background-color: white;
+}
+
+.todoListValueWrap {
+    display: flex;
+    flex-grow: 1;
+}
+
+.todoListTimes {
+    padding-right: 10px;
+}
+
+.todoListValueForm {
+    display: flex;
+    flex-grow: 1;
+}
+
+
+.todoMenuArrow {
+    /*position: absolute;*/
+    font-size: 7px;
+    width: 3em;
+    height: 3em;
+}
+
+.todoMenuArrow::before {
+    content: '';
+    margin: auto;
+    display: block;
+    width: 0;
+    height: 0;
+    border: solid;
+    border-width: 1em 1em 1em 1em;
+    border-color: transparent transparent black transparent;
+}
+
+.menuButton {
+    border: none;
+    outline: none;
+}
+.plusButton {
+    color: red;
+}
+.minusButton {
+    color: red;
+}
+.editButton {
+    color: red;
+}
+.deleteButton {
+    color: red;
+}
+
+.buttonImg {
+    vertical-align: baseline;
+}
