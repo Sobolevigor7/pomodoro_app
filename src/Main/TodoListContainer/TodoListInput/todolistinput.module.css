@@ -15,7 +15,7 @@
 .inputButton {
     width: 30%;
     margin-bottom: 25px;
-    padding: 15px 50px;
+    padding: 15px 0;
     background-color: var(--green);
     border: none;
     outline: none;
@@ -27,4 +27,24 @@
 
 .inputButton:disabled {
     background-color: var(--button-disabled);
+}
+
+.todoInput__description {
+    text-align: left;
+}
+
+.todoInput__list {
+    list-style-type: none;
+    color: var(--dark-grey-text);
+    font-size: 16px;
+    line-height: 33px;
+    font-weight: 400;
+}
+
+.todoInput__list::before {
+    content: "•";
+    padding-right: 15px;
+    color: var(--chooser-indicator);
+    font-weight: 400;
+    font-size: 16px;
 }

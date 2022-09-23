@@ -1,29 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { insert } from "../TodoListInput";
 
 import styles from "./todolist.module.css";
 import { createEvent, createStore } from "effector";
-import connectLocalStorage from "effector-localstorage/sync";
+import connectLocalStorage from "effector-localstorage";
 import { useList, useStore } from "effector-react";
 import Dropdown from "react-bootstrap/Dropdown";
 import classNames from "classnames";
 import { EIcons, Icon } from "../../../Icon";
+import { WORK_PERIOD } from "../../Main";
+import { storageSession } from "../../TimerContainer";
+import { DeleteTask } from "../../../utils/DeleteTask";
 
 interface Itodo {
   text: string;
   done: boolean;
   num: number;
   readonly: boolean;
+  timeLeft: number;
+  tomatoes: number;
+  currentSession: any;
 }
 
-const remove = createEvent<number>("remove");
+export const remove = createEvent<number>("remove");
 export const todoItemTimesIncrement = createEvent<number>(
   "todoItemTimesIncrement"
 );
-const todoItemTimesDecrement = createEvent<number>("todoItemTimesDecrement");
+export const todoItemTimesDecrement = createEvent<number>(
+  "todoItemTimesDecrement"
+);
 const editTodoToggle = createEvent<number>("editTodoToggle");
 const todoChange = createEvent<any>("todoChange");
 const todoBlur = createEvent<number>("todoBlur");
+export const tick = createEvent<number>("tick");
+export const timeLeftUpdate = createEvent<number>("timeLeftUpdate");
+export const stopButtonTimeLeftUpdate = createEvent<number>(
+  "stopButtonTimeLeftUpdate"
+);
+export const addTomato = createEvent<number>("addTomato");
+export const setCurrentSession = createEvent<any>("setCurrentSession");
+export const resetTodo = createEvent("resetTodo");
 
 const todoListLocalStorage = connectLocalStorage("$todoList").onError((err) =>
   console.log(err)
@@ -39,6 +55,7 @@ export const $todoList = createStore<Itodo[]>(todoListLocalStorage.init() || [])
         return {
           ...todo,
           num: todo.num + 1,
+          timeLeft: (todo.num + 1) * WORK_PERIOD,
         };
       return todo;
     })
@@ -49,6 +66,7 @@ export const $todoList = createStore<Itodo[]>(todoListLocalStorage.init() || [])
         return {
           ...todo,
           num: todo.num - 1,
+          timeLeft: (todo.num - 1) * WORK_PERIOD,
         };
       return todo;
     })
@@ -60,6 +78,9 @@ export const $todoList = createStore<Itodo[]>(todoListLocalStorage.init() || [])
       done: false,
       num: 1,
       readonly: true,
+      timeLeft: WORK_PERIOD,
+      tomatoes: 0,
+      currentSession: 0,
     },
   ])
   .on(editTodoToggle, (list, id) =>
@@ -91,6 +112,61 @@ export const $todoList = createStore<Itodo[]>(todoListLocalStorage.init() || [])
         };
       return todo;
     })
+  )
+  .on(tick, (list, id) =>
+    list.map((todo, i) => {
+      if (i === id)
+        return {
+          ...todo,
+
+          timeLeft: todo.timeLeft - 1,
+        };
+      return todo;
+    })
+  )
+  .on(timeLeftUpdate, (list, id) =>
+    list.map((todo, i) => {
+      if (i === id)
+        return {
+          ...todo,
+          timeLeft: todo.timeLeft + 60,
+        };
+      return todo;
+    })
+  )
+  .on(stopButtonTimeLeftUpdate, (list, timeAdd) =>
+    list.map((todo, i) => {
+      if (i === 0)
+        return {
+          ...todo,
+          timeLeft: todo.timeLeft + timeAdd,
+        };
+      return todo;
+    })
+  )
+
+  .on(addTomato, (list, id) =>
+    list.map((todo, i) => {
+      if (i === id)
+        return {
+          ...todo,
+          tomatoes: todo.tomatoes + 1,
+        };
+      return todo;
+    })
+  )
+  .on(setCurrentSession, (list, id) =>
+    list.map((todo, i) => {
+      if (i === id)
+        return {
+          ...todo,
+          currentSession: storageSession,
+        };
+      return todo;
+    })
+  )
+  .on(resetTodo, (todos) =>
+    todos.filter((state: any, i: number) => i === Infinity)
   );
 
 $todoList.watch(todoListLocalStorage);
@@ -102,12 +178,28 @@ export function TodoList() {
     document.getElementById("todo" + index.toString())?.focus();
   };
 
-  const allTasksAmountOfTime = useStore($todoList).reduce(
+  let allTasksAmountOfTime = useStore($todoList).reduce(
     (accumulator, currentValue) => {
-      return accumulator + currentValue.num;
+      return accumulator + currentValue.timeLeft;
     },
     0
   );
+
+  /*
+  Перевод общего времени в часы и минуты
+   */
+
+  const [hours, setHours] = useState<number>(0);
+  const [minutes, setMinutes] = useState<string>("");
+  useEffect(() => {
+    setHours(Math.floor(allTasksAmountOfTime / 60 / 60));
+    setMinutes(
+      Math.round((allTasksAmountOfTime / 60) % 60)
+        .toString()
+        .padStart(2, "0")
+    );
+  }, [allTasksAmountOfTime]);
+
   const listItemClass = classNames(
     "d-flex",
     "justify-content-between",
@@ -163,6 +255,7 @@ export function TodoList() {
         >
           <Icon icon={EIcons.menu} size={26} />
         </Dropdown.Toggle>
+
         <Dropdown.Menu
           flip={true}
           className={"dropdown-menu-center"}
@@ -193,7 +286,8 @@ export function TodoList() {
               onClick={() => todoItemTimesIncrement(index)}
               className={plusButtonClass}
             >
-              Добавить
+              <Icon icon={EIcons.plus} className={styles.buttonImg} size={18} />
+              Увеличить
             </button>
           </Dropdown.Item>
           <Dropdown.Item>
@@ -217,16 +311,7 @@ export function TodoList() {
                   size={18}
                 />
               )}
-              Минус
-            </button>
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <button
-              type="button"
-              onClick={() => remove(index)}
-              className={deleteButtonClass}
-            >
-              Убрать
+              Уменьшить
             </button>
           </Dropdown.Item>
           <Dropdown.Item>
@@ -238,8 +323,13 @@ export function TodoList() {
                 handleFocus(index);
               }}
             >
+              <Icon icon={EIcons.edit} className={styles.buttonImg} size={18} />
               Редактировать
             </button>
+          </Dropdown.Item>
+
+          <Dropdown.Item>
+            <DeleteTask index={index} />
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
@@ -249,7 +339,10 @@ export function TodoList() {
   return (
     <>
       <ul className={styles.todoList}>{todos}</ul>
-      <span className={styles.totalTime}>{allTasksAmountOfTime} мин</span>
+      <span className={styles.totalTime}>
+        {hours > 0 && `${hours} час `}
+        {minutes !== "00" && `${minutes} мин`}
+      </span>
     </>
   );
 }

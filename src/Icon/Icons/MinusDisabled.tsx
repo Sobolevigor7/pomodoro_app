@@ -12,7 +12,7 @@ export function MinusDisabled(props: TIcon) {
       width={size}
       height={size}
       className={className}
-      viewBox="0 0 26 6"
+      viewBox="0 0 26 8"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

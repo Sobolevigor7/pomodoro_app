@@ -5,8 +5,7 @@ import { TodoList } from "./TodoList";
 
 export function TodoListContainer() {
   return (
-    <div>
-      <p>TodoListContainer</p>
+    <div className={styles.container}>
       <TodoListInput />
       <TodoList />
     </div>

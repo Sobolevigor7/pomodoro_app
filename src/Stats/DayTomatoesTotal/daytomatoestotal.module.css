@@ -1,0 +1,35 @@
+.widget__container {
+    height: 180px;
+    background-color: var(--grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.widget__containerWithInfo{
+height: 130px;
+}
+
+.widget__totalTomatoes {
+    color: var(--light-grey-text);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    vertical-align: middle;
+}
+
+.widget__totalTomatoesFooter {
+    color: white;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    background-color: var(--red-text);
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+

@@ -1,0 +1,17 @@
+.weekChooser__container {
+    width: 40%;
+}
+
+
+
+.customChooser__indicator {
+    display: none;
+}
+
+.customChooser__indicators.css-1hb7zxy-IndicatorsContainer > div {
+    display: none;
+}
+
+.customChooser__dropdown-indicator {
+    display: none;
+}

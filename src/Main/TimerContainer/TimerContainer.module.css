@@ -1,0 +1,46 @@
+.timer__container {
+    width: 50%;
+    background-color: var(--grey);
+    height: 435px;
+    position: relative;
+}
+.timer__header {
+    background-color: var(--light-border);
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+    padding: 0 40px;
+}
+
+.noTask__message, .timeOut__message{
+    position: absolute;
+    font-weight: 700;
+    left: 35%;
+    top: 50%;
+}
+
+.timeOut__message {
+    left: auto;
+    padding: 0 10px;
+
+}
+
+.timer__header_info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: 700;
+    color: white;
+    line-height: 17px;
+    font-size: 16px;
+    align-items: center;
+}
+
+.timer__header_pause {
+    background-color: var(--red-text);
+}
+
+.timer__header_rest {
+    background-color: var(--green);
+}
+

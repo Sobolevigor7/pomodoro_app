@@ -1,44 +1,69 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./App.module.css";
 import {
   BrowserRouter as Router,
-  Route,
   Link,
-  Switch,
   Redirect,
+  Route,
+  Switch,
 } from "react-router-dom";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 import Container from "react-bootstrap/Container";
-import classNames from "classnames";
 import { Main } from "./Main";
 import { Stats } from "./Stats";
 import { Notfound } from "./Notfound";
+import { GlobalStorage } from "./GlobalStorage";
+import { EIcons, Icon } from "./Icon";
+import classNames from "classnames";
+
+import { FullReset } from "./utils/FullReset";
 
 function App() {
-  const headerClasses = classNames(
-    styles["AppHeader"],
-    styles["customheader"],
-    "mb-4"
+  const statsIconClass = classNames(
+    [styles.AppHeader__icon],
+    [styles.AppHeader__icon_stats]
   );
 
   return (
-    <Router>
+    <Router basename="/">
       <ThemeProvider
         breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs"]}
       >
         <Container>
           <div className={styles.App}>
-            <header className={headerClasses}>Заголовок приложения</header>
-            <Link to="/main">Main</Link>
-            <Link to="/stats">Stats</Link>
+            <header className={styles.AppHeader}>
+              <GlobalStorage />
+              <div>
+                <Link to="/main" className={styles.AppLink}>
+                  <Icon
+                    icon={EIcons.tomatosmall}
+                    size={40}
+                    className={styles.AppHeader__icon}
+                  />
+                  Главная
+                </Link>
+              </div>
+              <FullReset />
+              <div>
+                <Link to="/stats" className={styles.AppLink}>
+                  <Icon
+                    icon={EIcons.statsicon}
+                    size={24}
+                    className={statsIconClass}
+                  />
+                  Статистика
+                </Link>
+              </div>
+            </header>
+
             <Switch>
               <Route exact path="/">
                 <Redirect to="/main" />
               </Route>
-              <Route exact path="/main">
+              <Route path="/main">
                 <Main />
               </Route>
-              <Route exact path="/stats">
+              <Route path="/stats">
                 <Stats />
               </Route>
               <Route path="*">

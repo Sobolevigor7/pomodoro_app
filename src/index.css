@@ -3,10 +3,23 @@
 :root {
   --grey: #F4F4F4;
   --green: #A8B64F;
+  --dark-green: #899441;
   --button-disabled: #D5DBAF;
   --todoborder: #E4E4E4;
   --light-grey-text: #999999;
+  --light-border: #C4C4C4;
   --dark-grey-text: #333333;
+  --red-text: #DC3E22;
+  --focus-widget-active: #FFDDA9;
+  --focus-widget-icon-active: #FFAE35;
+  --pause-widget-active: #DFDCFE;
+  --pause-widget-icon-active: #9C97D7;
+  --stops-widget-active: #C5F1FF;
+  --stops-widget-icon-active: #7FC2D7;
+  --chooser-indicator: #B7280F;
+  --chooser-border: #DEDEDE;
+
+
 }
 
 body {
@@ -22,3 +35,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.customChooser__control--menu-is-open .customChooser__indicator{
+  transform: rotate(180deg);
+}
+
+.customChooser__indicator {
+  transition: all 0.2s ease-in-out !important;
+  color: var(--chooser-indicator) !important;
+}
+
+.customChooser__control, .customChooser__menu {
+  background-color: var(--grey) !important;
+  justify-content: left !important;
+  text-align: left !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+}
+
+.customChooser__single-value {
+  color: var(--dark-grey-text) !important;
+  text-align: left;
+}
+
+.customChooser__option:not(:last-child) {
+  border-bottom: 1px solid var(--chooser-border);
+}
+

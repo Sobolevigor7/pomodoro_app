@@ -1,0 +1,4 @@
+.widget__container {
+    height: 471px !important;
+    background-color: var(--grey);
+}

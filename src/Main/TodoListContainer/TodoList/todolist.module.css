@@ -42,11 +42,16 @@
 .todoListValueWrap {
     display: flex;
     flex-grow: 1;
+    align-self: center;
 }
 
 .todoListTimes {
-    padding-right: 10px;
+    padding:0 9px;
+    border: 1px solid var(--light-border);
+    border-radius: 100%;
+    margin-right: 10px;
 }
+
 
 .todoListValueForm {
     display: flex;
@@ -61,33 +66,15 @@
     height: 3em;
 }
 
-.todoMenuArrow::before {
-    content: '';
-    margin: auto;
-    display: block;
-    width: 0;
-    height: 0;
-    border: solid;
-    border-width: 1em 1em 1em 1em;
-    border-color: transparent transparent black transparent;
-}
+
 
 .menuButton {
     border: none;
     outline: none;
+    color: var(--light-grey-text);
+    background-color: transparent;
 }
-.plusButton {
-    color: red;
-}
-.minusButton {
-    color: red;
-}
-.editButton {
-    color: red;
-}
-.deleteButton {
-    color: red;
-}
+
 
 .buttonImg {
     vertical-align: baseline;

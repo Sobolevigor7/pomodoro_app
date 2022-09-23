@@ -1,0 +1,35 @@
+.widget__container {
+    display: flex;
+    width: 30%;
+    background-color: var(--grey);
+    justify-content: space-between;
+    height: 180px;
+    align-items: center;
+    padding: 0 25px;
+    transition: background-color 0.5s ease-in-out;
+}
+.widget__container_active {
+    background-color: var(--stops-widget-active);
+}
+
+.widget__text {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+}
+
+.widget__info {
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 76px;
+    text-align: left;
+}
+
+.widget__icon path {
+    transition: all .5s ease-in-out;
+}
+
+
+.widget__icon_active path {
+    stroke: var(--stops-widget-icon-active);
+}

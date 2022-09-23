@@ -1,5 +1,7 @@
-import React, { MouseEventHandler, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Timer.module.css";
+import classNames from "classnames";
+import { EIcons, Icon } from "../../../Icon";
 
 type Props = {
   startPauseClick: () => void;
@@ -31,17 +33,34 @@ export function Timer({
     setSeconds((count % 60).toString().padStart(2, "0"));
   }, [count]);
 
+  const stopDoneStyle = classNames(styles.timerButton, styles.timerStopButton);
+  const startStopStyle = classNames(
+    styles.timerButton,
+    styles.timerStartButton
+  );
+
   return (
     <div>
-      <div>СЧЕТ: {`${minutes} : ${seconds}`}</div>
-      <button onClick={startPauseClick} type="button">
+      <div className={styles.timerGroup}>
+        <div className={styles.timer}> {`${minutes} : ${seconds}`}</div>
+        <button type="button" className={styles.plusButton} onClick={addTime}>
+          <Icon icon={EIcons.plustime} size={50} className={styles.plusIcon} />
+        </button>
+      </div>
+      <button
+        onClick={startPauseClick}
+        type="button"
+        className={startStopStyle}
+      >
         {valueStartPause}
       </button>
-      <button type="button" onClick={stopDoneClick} disabled={isDisabled}>
+      <button
+        className={stopDoneStyle}
+        type="button"
+        onClick={stopDoneClick}
+        disabled={isDisabled}
+      >
         {valueStopDone}
-      </button>
-      <button type="button" onClick={addTime}>
-        Плюс
       </button>
     </div>
   );

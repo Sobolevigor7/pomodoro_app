@@ -3,21 +3,17 @@ import styles from "./Main.module.css";
 import { TimerContainer } from "./TimerContainer";
 import { TodoListContainer } from "./TodoListContainer";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+
+export const WORK_PERIOD: number = 1500; //1500
+export const REST_PERIOD: number = 180; //180
+export const LONG_REST_PERIOD: number = 900;
 
 export function Main() {
   return (
-    <Container>
-      Main
-      <Row>
-        <Col>
-          <TodoListContainer />
-        </Col>
-        <Col>
-          <TimerContainer />
-        </Col>
-      </Row>
+    <Container className={styles.container}>
+      <TodoListContainer />
+
+      <TimerContainer />
     </Container>
   );
 }

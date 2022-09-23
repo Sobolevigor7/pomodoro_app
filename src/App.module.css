@@ -2,22 +2,38 @@
     text-align: center;
 }
 
-
 .AppHeader {
-    background-color: lightsteelblue;
     min-height: 70px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    font-size: calc(10px + 2vmin);
+    font-size: 24px;
     color: white;
+    box-shadow: 0 10px 63px rgba(0, 0, 0, 0.07);
+    padding: 0 80px;
+    margin-bottom: 80px;
 }
 
-.customheader {
-    color: red;
+.AppHeader__icon {
+    margin-right: 10px;
+}
+
+
+.AppHeader__icon_stats path {
+    transition: all .3s ease-in-out;
 }
 
 .AppLink {
-    color: #61dafb;
+    color: var(--red-text);
+    text-decoration: none ;
+    transition: color .3s ease-in-out;
 }
+.AppLink:hover  {
+    color: var(--chooser-indicator);
+}
+
+.AppLink:hover .AppHeader__icon_stats path  {
+    fill: var(--chooser-indicator)
+}
+
 

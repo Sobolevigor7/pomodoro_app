@@ -1,0 +1,79 @@
+
+
+.timerButton {
+    width: 30%;
+    margin-bottom: 25px;
+    padding: 15px 0;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 17px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+
+.timerStopButton {
+    margin-right: 25px;
+    color: var(--red-text);
+    outline: solid 2px var(--red-text);
+
+}
+
+.timerStopButton:disabled {
+    margin-right: 25px;
+    color: var(--light-border);
+    outline: solid 2px var(--light-border);
+    background-color: transparent;
+}
+
+.timerStopButton:disabled:hover {
+    color: var(--light-border);
+    outline: solid 2px var(--light-border);
+    background-color: transparent;
+}
+
+.timerStopButton:hover {
+    background-color: var(--red-text);
+    outline: solid 2px var(--red-text);
+    color: white;
+}
+
+.timerStartButton {
+    background-color: var(--green);
+    margin-right: 25px;
+    outline: solid 2px var(--green);
+}
+
+.timerStartButton:hover {
+    background-color: var(--dark-green);
+    outline: solid 2px var(--dark-green);
+}
+
+.plusButton {
+    border: none;
+    border-radius: 50%;
+
+    align-self: center;
+}
+.timerGroup {
+    display: flex;
+    justify-content: center;
+
+}
+
+.timer {
+    font-size: 150px;
+    font-weight: 200;
+}
+
+.plusIcon circle {
+    transition: fill .3s ease-in-out;
+}
+.plusIcon:hover circle {
+    fill: var(--dark-green);
+
+}
+

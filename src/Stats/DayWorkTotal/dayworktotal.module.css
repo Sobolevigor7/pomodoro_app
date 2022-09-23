@@ -1,0 +1,28 @@
+.widget__container {
+    background-color: var(--grey);
+    height: 260px;
+    margin-bottom: 32px;
+    padding: 25px;
+    text-align: left;
+}
+
+.widget__weekDay {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+}
+
+.widget__info {
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--dark-grey-text);
+}
+
+.widget__text {
+    font-weight: 400;
+}
+
+.widget__time {
+    font-weight: 700;
+    color: var(--red-text)
+}

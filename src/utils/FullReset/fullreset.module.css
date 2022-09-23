@@ -1,0 +1,15 @@
+.confButton {
+    color: white;
+    background-color: var(--red-text);
+}
+
+.rejectButton {
+    color: var(--light-grey-text);
+    border: none;
+    border-radius: 0%;
+    width: 20%;
+    text-decoration: underline;
+    text-underline-offset: .5rem;
+
+
+}
