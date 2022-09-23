@@ -25,7 +25,7 @@ function App() {
   );
 
   return (
-    <Router basename="pomodorro-app.herokuapp.com/">
+    <Router>
       <ThemeProvider
         breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs"]}
       >
