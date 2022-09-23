@@ -33,9 +33,9 @@ enum currentStatus {
 }
 
 export let storageSession: number;
+const beepSound = new Audio("./beep-30b.mp3");
 
 export function TimerContainer() {
-  const beepSound = new Audio("./beep-30b.mp3");
   const currentToDoStore = useStore($todoList); //Текущее хранение
 
   const [workPeriod, setWorkPeriod] = useState<number>(WORK_PERIOD);
