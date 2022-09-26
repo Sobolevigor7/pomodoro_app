@@ -82,13 +82,13 @@ export function BarChart({ data, setSelectedWeekDay, selectedWeek }: Props) {
         },
 
         ticks: {
-          maxTicksLimit: 8,
+          maxTicksLimit: 6,
           padding: 10,
           labelOffset: 3,
           showLabelBackdrop: false,
           color: "#333333",
           callback: function (value, index, ticks) {
-            let res: string = "";
+            /* let res: string = "";
             if (Number(value) === 0) {
               res = "";
             } else if (Math.trunc(Number(value) / 60) > 60) {
@@ -104,6 +104,18 @@ export function BarChart({ data, setSelectedWeekDay, selectedWeek }: Props) {
                 Math.round(Number(value) / 60 / (WORK_PERIOD / 60)) *
                   (WORK_PERIOD / 60) +
                 " мин";
+            }*/
+            let res: string = "";
+            if (Number(value) === 0) {
+              res = "";
+            } else if (Math.trunc(Number(value) / 60) > 60) {
+              res =
+                Math.trunc(Math.floor(Number(value) / 60 / 60)) +
+                " ч " +
+                (Math.round(Number(value) / 60) % 60) +
+                " мин";
+            } else {
+              res = Math.round(Number(value) / 60) + " мин";
             }
 
             return res;
